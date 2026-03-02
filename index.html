@@ -5,25 +5,33 @@
   <title>My Membership</title>
   <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
 </head>
-
 <body>
-  <h1>Membership Program</h1>
-  <p id="status">กำลังโหลด...</p>
 
-  <script>
-    async function main() {
-      await liff.init({ liffId: "2009284869-fJCICdiD" });
+<h1>Membership Program</h1>
+<p id="status">กำลังโหลด...</p>
 
-      if (!liff.isLoggedIn()) {
-        liff.login();
-      } else {
-        const profile = await liff.getProfile();
-        document.getElementById("status").innerText =
-          "สวัสดี " + profile.displayName;
-      }
+<script>
+async function main() {
+  try {
+    await liff.init({ liffId: "2009284869-fJCICdiD" });
+
+    if (!liff.isLoggedIn()) {
+      liff.login();
+      return;
     }
 
-    main();
-  </script>
+    const profile = await liff.getProfile();
+    document.getElementById("status").innerText =
+      "สวัสดี " + profile.displayName;
+
+  } catch (err) {
+    document.getElementById("status").innerText =
+      "เกิด error: " + err;
+  }
+}
+
+main();
+</script>
+
 </body>
 </html>
