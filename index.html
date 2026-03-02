@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>My Membership</title>
+  <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+</head>
+
+<body>
+  <h1>Membership Program</h1>
+  <p id="status">กำลังโหลด...</p>
+
+  <script>
+    async function main() {
+      await liff.init({ liffId: "ใส่_LIFF_ID_ตรงนี้" });
+
+      if (!liff.isLoggedIn()) {
+        liff.login();
+      } else {
+        const profile = await liff.getProfile();
+        document.getElementById("status").innerText =
+          "สวัสดี " + profile.displayName;
+      }
+    }
+
+    main();
+  </script>
+</body>
+</html>
